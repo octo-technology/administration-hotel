@@ -8,7 +8,7 @@ import dao.Chambre;
 import dao.ChambreDao;
 import service.ChambreService;
 
-public class ListerLesChambres {
+public class ListerLesChambresTest {
 
 	@Test
 	void ne_retourne_aucun_chambre_si_hotel_sans_chambre() {
