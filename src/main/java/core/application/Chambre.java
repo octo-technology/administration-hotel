@@ -1,4 +1,4 @@
-package dao;
+package core.application;
 
 import java.util.Objects;
 
@@ -12,6 +12,18 @@ public class Chambre {
 		this.numero = numero;
 		this.etage = etage;
 		this.prix = prix;
+	}
+	
+	public void setPrix(double prix) {
+		this.prix = prix;
+	}
+
+	public double getPrix() {
+		return prix;
+	}
+
+	public int getEtage() {
+		return etage;
 	}
 
 	@Override
@@ -35,5 +47,6 @@ public class Chambre {
 	public String toString() {
 		return "Chambre [numero=" + numero + ", etage=" + etage + ", prix=" + prix + "]";
 	}
+
 
 }

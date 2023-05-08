@@ -1,7 +1,8 @@
+package serverside;
 import java.util.List;
 
-import dao.Chambre;
-import dao.ChambreDao;
+import core.application.Chambre;
+import core.port.serverside.ChambreDao;
 
 public class ChambreStubDao implements ChambreDao {
 
@@ -14,6 +15,10 @@ public class ChambreStubDao implements ChambreDao {
 	@Override
 	public List<Chambre> recupererChambres() {
 		return chambres;
+	}
+
+	@Override
+	public void modifierChambres(List<Chambre> chambres) {
 	}
 
 }

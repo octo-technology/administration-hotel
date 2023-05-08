@@ -1,14 +1,16 @@
+package userside;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import dao.Chambre;
-import dao.ChambreDao;
-import service.ChambreService;
+import core.application.Chambre;
+import core.port.serverside.ChambreDao;
+import core.port.userside.ChambreService;
+import serverside.ChambreStubDao;
 
-public class ListerLesChambres {
+public class ListerLesChambresTest {
 
 	@Test
 	void ne_retourne_aucun_chambre_si_hotel_sans_chambre() {
