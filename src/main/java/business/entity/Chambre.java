@@ -2,6 +2,8 @@ package business.entity;
 
 import java.util.Objects;
 
+import business.entity.dto.ChambreDto;
+
 public class Chambre {
 
 	private static final int PRIX_MAX = 200;
@@ -29,6 +31,10 @@ public class Chambre {
 		if (prix > PRIX_MAX) {
 			prix = PRIX_MAX;
 		}
+	}
+	
+	public ChambreDto toChambreDto() {
+		return new ChambreDto(numero, etage, prix);
 	}
 
 	@Override

@@ -1,10 +1,8 @@
 package business.usecase;
 
-import java.util.List;
-
-import business.entity.Chambre;
+import business.usecase.presenter.ChambrePresenter;
 
 public interface RecuperationChambre {
 
-	List<Chambre> execute();
+	void execute(ChambrePresenter chambrePresenter);
 }

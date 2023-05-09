@@ -3,6 +3,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import business.entity.Chambre;
@@ -18,12 +19,13 @@ public class ListerLesChambresTest {
 		// Given
 		ChambreDao chambreDao = new ChambreStubDao(List.of());
 		RecuperationChambre sut = new RecuperationChambreUseCase(chambreDao);
+		ChambreStringPresenter chambrePresenter = new ChambreStringPresenter();
 
 		// When
-		List<Chambre> chambres = sut.execute();
+		sut.execute(chambrePresenter);
 
 		// Then
-		assertEquals(0, chambres.size());
+		assertEquals("", chambrePresenter.getChaine());
 	}
 
 	@Test
@@ -31,12 +33,13 @@ public class ListerLesChambresTest {
 		// Given
 		ChambreDao chambreDao = new ChambreStubDao(List.of(new Chambre(1, 0, 50)));
 		RecuperationChambre sut = new RecuperationChambreUseCase(chambreDao);
+		ChambreStringPresenter chambrePresenter = new ChambreStringPresenter();
 
 		// When
-		List<Chambre> chambres = sut.execute();
+		sut.execute(chambrePresenter);
 
 		// Then
-		assertEquals(List.of(new Chambre(1, 0, 50)), chambres);
+		assertEquals(" etage = 0, num = 1, prix = 50.0", chambrePresenter.getChaine());
 	}
 	
 	@Test
@@ -44,12 +47,13 @@ public class ListerLesChambresTest {
 		// Given
 		ChambreDao chambreDao = new ChambreStubDao(List.of(new Chambre(1, 0, 50), new Chambre(101, 1, 53.5)));
 		RecuperationChambre sut = new RecuperationChambreUseCase(chambreDao);
+		ChambreStringPresenter chambrePresenter = new ChambreStringPresenter();
 
 		// When
-		List<Chambre> chambres = sut.execute();
+		sut.execute(chambrePresenter);
 
 		// Then
-		assertEquals(List.of(new Chambre(1, 0, 50), new Chambre(101, 1, 53.5)), chambres);
+		assertEquals(" etage = 0, num = 1, prix = 50.0 etage = 1, num = 101, prix = 53.5", chambrePresenter.getChaine());
 	}
 	
 	@Test
@@ -58,12 +62,12 @@ public class ListerLesChambresTest {
 		ChambreDao chambreDao = new ChambreStubDao(List.of(new Chambre(1, 0, 50), new Chambre(101, 1, 53.5)
 				, new Chambre(201, 2, 61), new Chambre(301, 3, 66.5)));
 		RecuperationChambre sut = new RecuperationChambreUseCase(chambreDao);
+		ChambreStringPresenter chambrePresenter = new ChambreStringPresenter();
 
 		// When
-		List<Chambre> chambres = sut.execute();
+		sut.execute(chambrePresenter);
 
 		// Then
-		assertEquals(List.of(new Chambre(1, 0, 50), new Chambre(101, 1, 53.5)
-				, new Chambre(201, 2, 61), new Chambre(301, 3, 66.5)), chambres);
+		assertEquals(" etage = 0, num = 1, prix = 50.0 etage = 1, num = 101, prix = 53.5 etage = 2, num = 201, prix = 61.0 etage = 3, num = 301, prix = 66.5", chambrePresenter.getChaine());
 	}
 }
