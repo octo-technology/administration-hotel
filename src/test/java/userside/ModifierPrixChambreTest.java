@@ -15,7 +15,7 @@ public class ModifierPrixChambreTest {
 	@Test
 	void le_prix_chambres_rdc_est_de_100euros_si_fixe_prix_chambre_rdc_a_100euros() {
 		// Given
-		ChambreSpyDao chambreSpyDao = new ChambreSpyDao(List.of(new Chambre(1, 0, 100)));
+		ChambreSpyDao chambreSpyDao = new ChambreSpyDao(List.of(new Chambre(1, 0, 50)));
 		ChambreService sut = new ChambreService(chambreSpyDao);
 
 		// When
@@ -28,7 +28,7 @@ public class ModifierPrixChambreTest {
 	@Test
 	void le_prix_chambres_1er_etage_est_de_107euros_si_fixe_prix_chambre_rdc_a_100euros_car_7_pourcents_du_prix() {
 		// Given
-		ChambreSpyDao chambreSpyDao = new ChambreSpyDao(List.of(new Chambre(101, 1, 100)));
+		ChambreSpyDao chambreSpyDao = new ChambreSpyDao(List.of(new Chambre(101, 1, 50)));
 		ChambreService sut = new ChambreService(chambreSpyDao);
 
 		// When
@@ -41,7 +41,7 @@ public class ModifierPrixChambreTest {
 	@Test
 	void le_prix_chambres_2e_etage_est_de_122euros_si_fixe_prix_chambre_rdc_a_100euros_car_22_pourcents_du_prix() {
 		// Given
-		ChambreSpyDao chambreSpyDao = new ChambreSpyDao(List.of(new Chambre(201, 2, 100)));
+		ChambreSpyDao chambreSpyDao = new ChambreSpyDao(List.of(new Chambre(201, 2, 50)));
 		ChambreService sut = new ChambreService(chambreSpyDao);
 
 		// When
@@ -54,7 +54,7 @@ public class ModifierPrixChambreTest {
 	@Test
 	void le_prix_chambres_2e_etage_est_de_133euros_si_fixe_prix_chambre_rdc_a_100euros_car_33_pourcents_du_prix() {
 		// Given
-		ChambreSpyDao chambreSpyDao = new ChambreSpyDao(List.of(new Chambre(301, 3, 100)));
+		ChambreSpyDao chambreSpyDao = new ChambreSpyDao(List.of(new Chambre(301, 3, 50)));
 		ChambreService sut = new ChambreService(chambreSpyDao);
 
 		// When
