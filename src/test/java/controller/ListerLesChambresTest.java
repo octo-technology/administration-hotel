@@ -1,14 +1,15 @@
-package userside;
+package controller;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import core.application.Chambre;
-import core.port.serverside.ChambreDao;
-import core.port.userside.ChambreService;
-import serverside.ChambreStubDao;
+import business.entity.Chambre;
+import business.gateway.ChambreDao;
+import business.usecase.RecuperationChambre;
+import business.usecase.RecuperationChambreUseCase;
+import gateway.ChambreStubDao;
 
 public class ListerLesChambresTest {
 
@@ -16,10 +17,10 @@ public class ListerLesChambresTest {
 	void ne_retourne_aucun_chambre_si_hotel_sans_chambre() {
 		// Given
 		ChambreDao chambreDao = new ChambreStubDao(List.of());
-		ChambreService sut = new ChambreService(chambreDao);
+		RecuperationChambre sut = new RecuperationChambreUseCase(chambreDao);
 
 		// When
-		List<Chambre> chambres = sut.recupererChambres();
+		List<Chambre> chambres = sut.execute();
 
 		// Then
 		assertEquals(0, chambres.size());
@@ -29,10 +30,10 @@ public class ListerLesChambresTest {
 	void retourne_une_chambre_si_hotel_a_une_chambre() {
 		// Given
 		ChambreDao chambreDao = new ChambreStubDao(List.of(new Chambre(1, 0, 50)));
-		ChambreService sut = new ChambreService(chambreDao);
+		RecuperationChambre sut = new RecuperationChambreUseCase(chambreDao);
 
 		// When
-		List<Chambre> chambres = sut.recupererChambres();
+		List<Chambre> chambres = sut.execute();
 
 		// Then
 		assertEquals(List.of(new Chambre(1, 0, 50)), chambres);
@@ -42,10 +43,10 @@ public class ListerLesChambresTest {
 	void retourne_deux_chambres_si_hotel_a_deux_chambres_rdv_et_1er_etage() {
 		// Given
 		ChambreDao chambreDao = new ChambreStubDao(List.of(new Chambre(1, 0, 50), new Chambre(101, 1, 53.5)));
-		ChambreService sut = new ChambreService(chambreDao);
+		RecuperationChambre sut = new RecuperationChambreUseCase(chambreDao);
 
 		// When
-		List<Chambre> chambres = sut.recupererChambres();
+		List<Chambre> chambres = sut.execute();
 
 		// Then
 		assertEquals(List.of(new Chambre(1, 0, 50), new Chambre(101, 1, 53.5)), chambres);
@@ -56,10 +57,10 @@ public class ListerLesChambresTest {
 		// Given
 		ChambreDao chambreDao = new ChambreStubDao(List.of(new Chambre(1, 0, 50), new Chambre(101, 1, 53.5)
 				, new Chambre(201, 2, 61), new Chambre(301, 3, 66.5)));
-		ChambreService sut = new ChambreService(chambreDao);
+		RecuperationChambre sut = new RecuperationChambreUseCase(chambreDao);
 
 		// When
-		List<Chambre> chambres = sut.recupererChambres();
+		List<Chambre> chambres = sut.execute();
 
 		// Then
 		assertEquals(List.of(new Chambre(1, 0, 50), new Chambre(101, 1, 53.5)

@@ -1,8 +1,8 @@
-package serverside;
+package gateway;
 import java.util.List;
 
-import core.application.Chambre;
-import core.port.serverside.ChambreDao;
+import business.entity.Chambre;
+import business.gateway.ChambreDao;
 
 public class ChambreSpyDao implements ChambreDao {
 

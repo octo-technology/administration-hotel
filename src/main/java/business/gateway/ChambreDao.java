@@ -1,8 +1,8 @@
-package core.port.serverside;
+package business.gateway;
 
 import java.util.List;
 
-import core.application.Chambre;
+import business.entity.Chambre;
 
 public interface ChambreDao {
 
