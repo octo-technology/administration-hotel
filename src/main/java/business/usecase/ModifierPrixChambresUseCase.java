@@ -1,23 +1,19 @@
 package business.usecase;
 
-import java.util.List;
-
-import business.entity.Chambre;
-import business.gateway.ChambreDao;
+import business.entity.Hotel;
+import business.gateway.HotelRepository;
 
 public class ModifierPrixChambresUseCase implements ModifierPrixChambres {
 
-	private ChambreDao chambreDao;
+	private HotelRepository hotelRepository;
 
-	public ModifierPrixChambresUseCase(ChambreDao chambreDao) {
-		this.chambreDao = chambreDao;
+	public ModifierPrixChambresUseCase(HotelRepository hotelRepository) {
+		this.hotelRepository = hotelRepository;
 	}
 
 	public void execute(double prixChambreRdc) {
-		List<Chambre> chambres = chambreDao.recupererChambres();
-		for (Chambre chambre : chambres) {
-			chambre.modifierPrix(prixChambreRdc);
-		}
-		chambreDao.modifierChambres(chambres);
+		Hotel hotel = hotelRepository.recuperer();
+		hotel.modifierPrix(prixChambreRdc);
+		hotelRepository.modifier(hotel);
 	}
 }

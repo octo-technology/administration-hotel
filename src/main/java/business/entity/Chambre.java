@@ -6,35 +6,32 @@ import business.entity.dto.ChambreDto;
 
 public class Chambre {
 
-	private static final int PRIX_MAX = 200;
-
 	private int numero;
 	private int etage;
-	private double prix;
+	private PrixChambre prix;
 
-	public Chambre(int numero, int etage, double prix) {
+	public Chambre(int numero, int etage, PrixChambre prix) {
 		this.numero = numero;
 		this.etage = etage;
 		this.prix = prix;
 	}
 
 	public void modifierPrix(double prixChambreRdc) {
+		prix = new PrixChambre(prixChambreRdc);
 		if (etage == 1) {
-			prix = prixChambreRdc * 1.07;
+			prix = prix.getPrixAugmenteDe(7);
 		} else if (etage == 2) {
-			prix = prixChambreRdc * 1.22;
+			prix =  prix.getPrixAugmenteDe(22);
 		} else if (etage == 3) {
-			prix = prixChambreRdc * 1.33;
-		} else {
-			prix = prixChambreRdc;	
+			prix = prix.getPrixAugmenteDe(33);
 		}
-		if (prix > PRIX_MAX) {
-			prix = PRIX_MAX;
+		if (prix.estSuperieurAPrixMax()) {
+			prix = prix.getPrixMax();
 		}
 	}
 	
 	public ChambreDto toChambreDto() {
-		return new ChambreDto(numero, etage, prix);
+		return new ChambreDto(numero, etage, prix.getValeur());
 	}
 
 	@Override
@@ -51,14 +48,12 @@ public class Chambre {
 		if (getClass() != obj.getClass())
 			return false;
 		Chambre other = (Chambre) obj;
-		return etage == other.etage && numero == other.numero && prix == other.prix;
+		return etage == other.etage && numero == other.numero && Objects.equals(prix, other.prix);
 	}
 
 	@Override
 	public String toString() {
 		return "Chambre [numero=" + numero + ", etage=" + etage + ", prix=" + prix + "]";
 	}
-
-
 
 }
